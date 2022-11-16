@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "541638150787",
+    "project_id": "transport-schedule-bd9a0",
+    "storage_bucket": "transport-schedule-bd9a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541638150787:android:87ad9c4bd1d0026d5ca9b6",
+        "android_client_info": {
+          "package_name": "uz.nurlibaydev.transportschedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541638150787-v7hq3o6am2os6kv6noisnsqf2adn2uns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.nurlibaydev.transportschedule",
+            "certificate_hash": "f3bd59f253740d9725c806b8f881133ebe26500a"
+          }
+        },
+        {
+          "client_id": "541638150787-s2nlglitvk12iml82bk51ihms2o1tnfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBif2D2eTLitzJzOymrh_ty7kbcciHO3ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541638150787-s2nlglitvk12iml82bk51ihms2o1tnfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
