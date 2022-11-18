@@ -28,7 +28,6 @@
         app:layout_constraintBottom_toTopOf="@id/container_bottom"
         tools:listitem="@layout/list_item_main" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_bottom"
         android:layout_width="match_parent"
@@ -60,4 +59,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drag_drop_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

@@ -6,6 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -129,6 +130,12 @@ dependencies {
     implementation "ru.ldralighieri.corbind:corbind-lifecycle:$corbind_version"
     implementation "ru.ldralighieri.corbind:corbind-recyclerview:$corbind_version"
     implementation "ru.ldralighieri.corbind:corbind-viewpager2:$corbind_version"
+
+
+    //map
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
 
     //image picker
 //    implementation 'com.github.Drjacky:ImagePicker:2.1.16'
