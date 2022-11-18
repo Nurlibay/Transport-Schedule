@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/bg_main_item"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/image_car"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_car"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.09" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_taxi_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/image_car"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Taxi 1031" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_taxi_start_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/bg_taxi_start"
+        android:drawablePadding="6dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_taxi_name"
+        app:layout_constraintStart_toStartOf="@id/tv_taxi_name"
+        tools:text="Mall street"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_taxi_end_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/bg_taxi_end"
+        android:drawablePadding="6dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_taxi_start_location"
+        app:layout_constraintStart_toStartOf="@id/tv_taxi_name"
+        tools:text="Old street"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

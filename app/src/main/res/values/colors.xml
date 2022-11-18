@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="main_color">#07B464</color>
+    <color name="main_color">@color/app_color</color>
     <color name="icon_color">#192528</color>
+    <color name="app_color">#0C79FE</color>
+    <color name="bg_color">#E9E9E9</color>
+    <color name="bg_color_selected">#9E9D9D</color>
 </resources>
