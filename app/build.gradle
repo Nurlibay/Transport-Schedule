@@ -137,6 +137,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
 
+
+    implementation 'com.google.maps.android:maps-ktx:3.2.1'
+
+    // (Optional) KTX for the Maps SDK for Android Utility Library
+    implementation 'com.google.maps.android:maps-utils-ktx:3.2.1'
+
     //image picker
 //    implementation 'com.github.Drjacky:ImagePicker:2.1.16'
 }
