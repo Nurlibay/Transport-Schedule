@@ -31,6 +31,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_bottom"
         android:layout_width="match_parent"
+        android:elevation="@dimen/margin_middle"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="@dimen/margin_standard">

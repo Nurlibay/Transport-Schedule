@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/mapScreen">
+    app:startDestination="@id/mainScreen">
 
     <fragment
         android:id="@+id/mapScreen"
+        tools:layout="@layout/screen_map"
         android:name="uz.nurlibaydev.transportschedule.presentation.map.MapScreen"
-        android:label="MapScreen" />
+        android:label="MapScreen" >
+        <argument
+            android:name="taxi_data"
+            app:argType="uz.nurlibaydev.transportschedule.data.models.TaxiData" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainScreen"
+        tools:layout="@layout/screen_main"
+        android:name="uz.nurlibaydev.transportschedule.presentation.main.MainScreen"
+        android:label="MainScreen" >
+        <action
+            android:id="@+id/action_mainScreen_to_mapScreen"
+            app:destination="@id/mapScreen" />
+    </fragment>
 </navigation>

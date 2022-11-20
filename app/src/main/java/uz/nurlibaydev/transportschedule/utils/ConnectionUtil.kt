@@ -4,8 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import uz.nurlibaydev.transportschedule.app.App
 
-//fun hasConnection(): Boolean = App.instance.isAvailableNetwork()
+fun hasConnection(): Boolean = App.instance.isAvailableNetwork()
 
 private fun Context.isAvailableNetwork(): Boolean {
     var result = false

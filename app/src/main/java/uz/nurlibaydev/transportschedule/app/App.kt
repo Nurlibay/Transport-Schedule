@@ -10,11 +10,17 @@ import uz.nurlibaydev.transportschedule.BuildConfig
  */
 
 @HiltAndroidApp
-class App: Application() {
+class App : Application() {
+
+    companion object {
+        lateinit var instance: App
+    }
+
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        instance = this
     }
 }

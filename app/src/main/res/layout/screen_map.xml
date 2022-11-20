@@ -6,19 +6,34 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-      <include layout="@layout/layout_map"/>
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            android:name="uz.nurlibaydev.transportschedule.presentation.map.MapHelper"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </LinearLayout>
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/bottomSheet"
+        style="@style/ModalBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded_dialog"
         android:overScrollMode="never"
-        style="@style/ModalBottomSheet"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -42,6 +57,7 @@
                 android:id="@+id/tv_taxi_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_middle"
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -55,6 +71,7 @@
                 android:id="@+id/card_time_container"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_marginTop="@dimen/margin_middle"
                 app:cardBackgroundColor="@color/main_color"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="1dp"
@@ -71,7 +88,8 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_car" />
+                        android:src="@drawable/ic_car"
+                        app:tint="@color/white" />
 
                     <TextView
                         android:id="@+id/tv_time"
@@ -80,7 +98,121 @@
                         android:layout_marginStart="@dimen/margin_middle"
                         android:textColor="@color/white"
                         android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="7 minutes" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_duration_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:minHeight="56dp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_time_container">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/margin_middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_standard"
+                        android:text="@string/hours"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/tvDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_standard"
+                        android:layout_marginTop="@dimen/margin_middle"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="17:00 - 00:00" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12"
+                android:text="@string/details"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_duration_container" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_details_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:minHeight="56dp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_details">
+
+                <LinearLayout
+                    android:id="@+id/container_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/margin_standard"
+                    android:paddingVertical="@dimen/margin_middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="@dimen/margin_middle"
+                        android:textColor="@color/main_color"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="+99 890 714 41 02" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="@dimen/margin_middle"
+                        android:background="@color/main_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textSize="16sp" />
+
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

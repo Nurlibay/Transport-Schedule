@@ -142,6 +142,7 @@ dependencies {
 
     // (Optional) KTX for the Maps SDK for Android Utility Library
     implementation 'com.google.maps.android:maps-utils-ktx:3.2.1'
+    implementation 'com.github.jd-alexander:library:1.1.0'
 
     //image picker
 //    implementation 'com.github.Drjacky:ImagePicker:2.1.16'

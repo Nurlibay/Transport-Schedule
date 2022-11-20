@@ -2,8 +2,11 @@ package uz.nurlibaydev.transportschedule.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
 
-class AuthHelper(
+@ViewModelScoped
+class AuthHelper @Inject constructor(
     private val auth: FirebaseAuth,
     private val db: FirebaseFirestore
 ) {
