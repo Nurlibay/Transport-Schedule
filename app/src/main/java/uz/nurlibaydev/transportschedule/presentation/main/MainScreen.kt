@@ -17,7 +17,9 @@ import ru.ldralighieri.corbind.widget.textChanges
 import uz.nurlibaydev.transportschedule.R
 import uz.nurlibaydev.transportschedule.data.sharedpref.SharePref
 import uz.nurlibaydev.transportschedule.databinding.ScreenMainBinding
+import uz.nurlibaydev.transportschedule.presentation.dialogs.LanguageDialog
 import uz.nurlibaydev.transportschedule.presentation.dialogs.ProgressDialog
+import uz.nurlibaydev.transportschedule.utils.extenions.onClick
 import uz.nurlibaydev.transportschedule.utils.extenions.showError
 import uz.nurlibaydev.transportschedule.utils.extenions.showMessage
 import javax.inject.Inject
@@ -43,6 +45,11 @@ class MainScreen : Fragment(R.layout.screen_main) {
         dialog = ProgressDialog(ctx = requireContext(), "Progress")
 
         viewModel.getAllTaxis()
+
+        viewBinding.btnLang.onClick {
+            val dialog = LanguageDialog()
+            dialog.show(requireActivity().supportFragmentManager, "LanguageDialog")
+        }
 
         viewBinding.inputSearch
             .textChanges()

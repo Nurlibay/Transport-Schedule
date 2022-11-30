@@ -14,7 +14,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Taxis" />
+        app:title="Taxis">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_lang"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_standard"
+            android:padding="@dimen/margin_middle"
+            android:src="@drawable/language" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_taxi"
@@ -31,9 +42,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_bottom"
         android:layout_width="match_parent"
-        android:elevation="@dimen/margin_middle"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:elevation="@dimen/margin_middle"
         android:padding="@dimen/margin_standard">
 
         <View
@@ -59,6 +70,7 @@
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/drag_drop_view" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

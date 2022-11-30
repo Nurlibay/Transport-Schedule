@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Transport Schedule</string>
     <string name="lang_text">English</string>
@@ -14,7 +15,9 @@
     <string name="no_internet">No Internet connection</string>
     <string name="home">Home</string>
     <string name="enter_full_name">Enter full name</string>
+    <string name="teacher">Teacher</string>
     <string name="profile">Profile</string>
+    <string name="student_s_timetable">Student\'s timetable</string>
     <string name="phone_number">Phone Number</string>
     <string name="edit_profile">Edit profile</string>
     <string name="edit_profile_image">Edit profile image</string>
@@ -37,7 +40,4 @@
     <string name="save">Save</string>
     <string name="share_app">Share This App</string>
     <string name="transport_schedule">Transport Schedule</string>
-    <string name="language">Langauge</string>
-    <string name="english">English</string>
-    <string name="russion">Russion</string>
 </resources>

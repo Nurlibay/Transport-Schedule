@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/transport_schedule"
         android:textColor="@color/black"
-        android:textSize="32sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/iv_student_timetable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

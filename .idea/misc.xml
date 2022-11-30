@@ -3,8 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/drawable/shape_dialog.xml" value="0.141" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/drawable/view_divider.xml" value="0.141" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/dialog_choose_language.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/dialog_error.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/dialog_loading.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/dialog_message.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/list_item_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/list_item_routes.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/screen_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/screen_map.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/screen_signin.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/screen_signup.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/TransportSchedule/app/src/main/res/layout/screen_splash.xml" value="0.20416666666666666" />
       </map>
