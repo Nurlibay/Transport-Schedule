@@ -5,14 +5,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import uz.nurlibaydev.transportschedule.data.helper.TaxiHelper
+import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModelImpl @Inject constructor(
-    private val taxiHelper: TaxiHelper
+    private val taxiHelper: TaxiHelper,
 ) : MainViewModel, ViewModel() {
 
     override val allTaxis = MutableStateFlow<List<TaxiData>>(emptyList())
@@ -27,34 +28,22 @@ class MainViewModelImpl @Inject constructor(
 
     override fun getAllTaxis() {
         viewModelScope.launch {
-            taxis = listOf(
-                TaxiData(
-                    address = listOf(
-                        "Arqa saga",
-                        "Orta ovul",
-                        "Taylaq awul",
-                        "Qumjap",
-                        "Andrey",
-                        "Qanjigal"
-                    )
-                )
-            )
             allTaxis.emit(
                 taxis
             )
-            /*  progressFlow.emit(true)
-              taxiHelper
-                  .getAllTaxi()
-                  .collectLatest {
-                      progressFlow.emit(false)
-                      it.onSuccess { data ->
-                          allTaxis.emit(data)
-                      }.onMessage { message ->
-                          messageFlow.emit(message)
-                      }.onError { error ->
-                          errorFlow.emit(error.localizedMessage ?: "Unknown error")
-                      }
-                  }*/
+            progressFlow.emit(true)
+            taxiHelper
+                .getAllTaxi()
+                .collectLatest {
+                    progressFlow.emit(false)
+                    it.onSuccess { data ->
+                        allTaxis.emit(data)
+                    }.onMessage { message ->
+                        messageFlow.emit(message)
+                    }.onError { error ->
+                        errorFlow.emit(error.localizedMessage ?: "Unknown error")
+                    }
+                }
         }
     }
 

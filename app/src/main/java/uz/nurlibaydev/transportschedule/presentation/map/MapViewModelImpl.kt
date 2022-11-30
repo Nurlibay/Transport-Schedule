@@ -8,6 +8,7 @@ import com.directions.route.RouteException
 import com.directions.route.RoutingListener
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.internal.OnConnectionFailedListener
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -33,8 +34,8 @@ class MapViewModelImpl @Inject constructor() : MapViewModel, RoutingListener,
             .travelMode(AbstractRouting.TravelMode.DRIVING)
             .withListener(this)
             .alternativeRoutes(true)
-            .waypoints(taxiData.start, taxiData.end)
-            .key("AIzaSyDg2O5oMElsgmb5ROB_Yo_jkgWdFL5gZso")
+            .waypoints(LatLng(taxiData.startLan, taxiData.startLng), LatLng(taxiData.endLan, taxiData.endLng))
+            .key("AIzaSyCbtHqVLiqdQJWEm1XHzbjcdrLga8m5yzE")
             .build()
         routing.execute()
     }

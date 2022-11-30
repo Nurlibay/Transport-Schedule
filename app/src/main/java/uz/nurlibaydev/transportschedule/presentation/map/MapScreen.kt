@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.ktx.addMarker
 import com.google.maps.android.ktx.addPolyline
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,7 @@ import uz.nurlibaydev.transportschedule.utils.extenions.showError
 import uz.nurlibaydev.transportschedule.utils.extenions.showMessage
 
 // Created by Jamshid Isoqov an 11/18/2022
+
 @AndroidEntryPoint
 class MapScreen : Fragment(R.layout.screen_map) {
 
@@ -102,7 +104,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     val endLatLng = polyline.points[k - 1]
 
                     val cameraUpdateMiddle =
-                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: args.taxiData.start, 12f)
+                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng), 12f)
                     googleMap.moveCamera(cameraUpdateMiddle)
 
                     val routes = args.taxiData.address

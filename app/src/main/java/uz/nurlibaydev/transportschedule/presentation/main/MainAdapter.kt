@@ -9,9 +9,7 @@ import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import uz.nurlibaydev.transportschedule.databinding.ListItemMainBinding
 import uz.nurlibaydev.transportschedule.utils.extenions.inflate
 
-
 // Created by Jamshid Isoqov an 11/20/2022
-
 
 val listItemTaxiCallback = object : DiffUtil.ItemCallback<TaxiData>() {
     override fun areItemsTheSame(oldItem: TaxiData, newItem: TaxiData): Boolean =
@@ -19,7 +17,10 @@ val listItemTaxiCallback = object : DiffUtil.ItemCallback<TaxiData>() {
 
     override fun areContentsTheSame(oldItem: TaxiData, newItem: TaxiData): Boolean =
         oldItem.taxiName == newItem.taxiName &&
-                oldItem.end == newItem.end &&
+                oldItem.startLan == newItem.startLan &&
+                oldItem.startLng == newItem.startLng &&
+                oldItem.endLan == newItem.endLan &&
+                oldItem.endLng == newItem.endLng &&
                 oldItem.address == newItem.address &&
                 oldItem.phone == newItem.phone
 
