@@ -1,4 +1,4 @@
-package uz.nurlibaydev.transportschedule.domain
+package uz.nurlibaydev.transportschedule.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.nurlibaydev.transportschedule.data.helper.AuthHelper
 import javax.inject.Singleton
 
 /**
@@ -20,6 +21,8 @@ object FirebaseModule {
     fun provideFireStore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @[Provides Singleton]
-    fun provideFirebaseAuth():FirebaseAuth = FirebaseAuth.getInstance()
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
+    @[Provides Singleton]
+    fun provideAuthHelper(auth: FirebaseAuth, db: FirebaseFirestore) = AuthHelper(auth, db)
 }

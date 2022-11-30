@@ -8,7 +8,7 @@ import uz.nurlibaydev.transportschedule.data.models.TaxiData
 interface MapViewModel {
 
     val messageFlow:SharedFlow<String>
-
+    
     val errorFlow:SharedFlow<String>
 
     val progressFlow:SharedFlow<Boolean>
@@ -16,7 +16,5 @@ interface MapViewModel {
     val routes:SharedFlow<Routing>
 
     fun finRoutes(taxiData: TaxiData)
-
-
 
 }

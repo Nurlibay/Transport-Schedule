@@ -1,4 +1,4 @@
-package uz.nurlibaydev.transportschedule.di
+package uz.nurlibaydev.transportschedule.data.helper
 
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -38,7 +38,5 @@ class TaxiHelper @Inject constructor(
         }
     }.catch { error ->
         emit(ResultData.error(error))
-    }
-        .flowOn(Dispatchers.IO)
-
+    }.flowOn(Dispatchers.IO)
 }

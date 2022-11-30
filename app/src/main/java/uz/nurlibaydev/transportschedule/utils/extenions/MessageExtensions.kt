@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import uz.nurlibaydev.transportschedule.presentation.dialogs.ErrorDialog
 import uz.nurlibaydev.transportschedule.presentation.dialogs.MessageDialog
 
-fun Fragment.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
+fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     if (context != null) {
         Toast.makeText(context, message, duration).show()
     }
 }
 
-fun Activity.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
+fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 

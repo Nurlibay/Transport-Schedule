@@ -1,4 +1,4 @@
-package uz.nurlibaydev.transportschedule.di
+package uz.nurlibaydev.transportschedule.data.helper
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

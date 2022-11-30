@@ -19,5 +19,4 @@ class ErrorDialog(ctx: Context, private val message: String) : Dialog(ctx) {
             dismiss()
         }
     }
-
 }

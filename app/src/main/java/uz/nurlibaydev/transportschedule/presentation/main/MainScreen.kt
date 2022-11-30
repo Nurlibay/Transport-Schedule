@@ -15,27 +15,29 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.ldralighieri.corbind.widget.textChanges
 import uz.nurlibaydev.transportschedule.R
+import uz.nurlibaydev.transportschedule.data.sharedpref.SharePref
 import uz.nurlibaydev.transportschedule.databinding.ScreenMainBinding
 import uz.nurlibaydev.transportschedule.presentation.dialogs.ProgressDialog
 import uz.nurlibaydev.transportschedule.utils.extenions.showError
 import uz.nurlibaydev.transportschedule.utils.extenions.showMessage
+import javax.inject.Inject
 
 // Created by Jamshid Isoqov an 11/18/2022
 @AndroidEntryPoint
 class MainScreen : Fragment(R.layout.screen_main) {
 
     private val viewModel: MainViewModel by viewModels<MainViewModelImpl>()
-
     private val viewBinding: ScreenMainBinding by viewBinding()
-
     private val adapter: MainAdapter by lazy(LazyThreadSafetyMode.NONE) {
         MainAdapter()
     }
-
     private lateinit var dialog: ProgressDialog
+    @Inject
+    lateinit var pref: SharePref
 
     @OptIn(FlowPreview::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        pref.isSigned = true
         viewBinding.listTaxi.adapter = adapter
 
         dialog = ProgressDialog(ctx = requireContext(), "Progress")
@@ -72,8 +74,5 @@ class MainScreen : Fragment(R.layout.screen_main) {
                 dialog.cancel()
             }
         }.launchIn(lifecycleScope)
-
-
     }
-
 }

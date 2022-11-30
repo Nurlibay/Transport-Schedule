@@ -1,4 +1,4 @@
-package uz.nurlibaydev.transportschedule.domain
+package uz.nurlibaydev.transportschedule.di
 
 import android.content.Context
 import dagger.Module

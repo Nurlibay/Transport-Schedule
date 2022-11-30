@@ -3,24 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/mainScreen">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/mapScreen"
-        tools:layout="@layout/screen_map"
         android:name="uz.nurlibaydev.transportschedule.presentation.map.MapScreen"
-        android:label="MapScreen" >
+        android:label="MapScreen"
+        tools:layout="@layout/screen_map">
         <argument
             android:name="taxi_data"
             app:argType="uz.nurlibaydev.transportschedule.data.models.TaxiData" />
     </fragment>
+
     <fragment
         android:id="@+id/mainScreen"
-        tools:layout="@layout/screen_main"
         android:name="uz.nurlibaydev.transportschedule.presentation.main.MainScreen"
-        android:label="MainScreen" >
+        android:label="MainScreen"
+        tools:layout="@layout/screen_main">
+
         <action
             android:id="@+id/action_mainScreen_to_mapScreen"
             app:destination="@id/mapScreen" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/signInScreen"
+        android:name="uz.nurlibaydev.transportschedule.presentation.auth.signin.SignInScreen"
+        android:label="SignInScreen"
+        tools:layout="@layout/screen_signin">
+        <action
+            android:id="@+id/action_signInScreen_to_signUpScreen"
+            app:destination="@id/signUpScreen" />
+        <action
+            android:id="@+id/action_signInScreen_to_mainScreen"
+            app:destination="@id/mainScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpScreen"
+        android:name="uz.nurlibaydev.transportschedule.presentation.auth.signup.SignUpScreen"
+        android:label="SignUpScreen"
+        tools:layout="@layout/screen_signup">
+        <action
+            android:id="@+id/action_signUpScreen_to_signInScreen"
+            app:destination="@id/signInScreen" />
+        <action
+            android:id="@+id/action_signUpScreen_to_mainScreen"
+            app:destination="@id/mainScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="uz.nurlibaydev.transportschedule.presentation.splash.SplashScreen"
+        android:label="SplashScreen"
+        tools:layout="@layout/screen_splash">
+        <action
+            android:id="@+id/action_splashScreen_to_signInScreen"
+            app:destination="@id/signInScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreen_to_mainScreen"
+            app:destination="@id/mainScreen"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>

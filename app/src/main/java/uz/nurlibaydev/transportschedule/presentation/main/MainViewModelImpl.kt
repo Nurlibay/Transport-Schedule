@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import uz.nurlibaydev.transportschedule.data.models.TaxiData
-import uz.nurlibaydev.transportschedule.di.TaxiHelper
+import uz.nurlibaydev.transportschedule.data.helper.TaxiHelper
 import javax.inject.Inject
 
 @HiltViewModel

@@ -39,4 +39,5 @@
     <string name="name">Name</string>
     <string name="save">Save</string>
     <string name="share_app">Share This App</string>
+    <string name="transport_schedule">Transport Schedule</string>
 </resources>
