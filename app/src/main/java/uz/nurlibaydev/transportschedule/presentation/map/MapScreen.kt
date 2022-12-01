@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.*
 import com.google.maps.android.ktx.addMarker
 import com.google.maps.android.ktx.addPolyline
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +23,7 @@ import uz.nurlibaydev.transportschedule.presentation.dialogs.ProgressDialog
 import uz.nurlibaydev.transportschedule.utils.extenions.bitmapFromVector
 import uz.nurlibaydev.transportschedule.utils.extenions.showError
 import uz.nurlibaydev.transportschedule.utils.extenions.showMessage
+import uz.nurlibaydev.transportschedule.utils.extenions.showToast
 
 // Created by Jamshid Isoqov an 11/18/2022
 
@@ -34,12 +35,15 @@ class MapScreen : Fragment(R.layout.screen_map) {
     private val viewBinding: ScreenMapBinding by viewBinding()
 
     private val args: MapScreenArgs by navArgs()
+    private var line: Polyline? = null
 
     private lateinit var dialog: ProgressDialog
 
     private lateinit var googleMap: GoogleMap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel.finRoutes(args.taxiData)
 
         dialog = ProgressDialog(ctx = requireContext(), "Progress")
 
@@ -66,7 +70,6 @@ class MapScreen : Fragment(R.layout.screen_map) {
             tvPhone.text = data.phone
             tvDuration.text = data.schedule
 
-
             for (i in data.address) {
                 val binding = ListItemRoutesBinding.bind(
                     layoutInflater.inflate(
@@ -79,51 +82,44 @@ class MapScreen : Fragment(R.layout.screen_map) {
                 viewBinding.containerDetails.addView(binding.root)
             }
 
-            val mapFragment =
-                childFragmentManager.findFragmentById(R.id.map) as MapHelper
+            val routes = args.taxiData.address
+
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
             mapFragment.getMapAsync(mapFragment)
             mapFragment.onMapReady {
                 googleMap = it
+                googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
                 googleMap.uiSettings.apply {
                     isCompassEnabled = false
                 }
 
-                viewModel.routes.onEach {
-                    val shortestRouteIndex = it.shortestRouteIndex
-                    val route = it.route?.get(shortestRouteIndex)
+                googleMap.addMarker(MarkerOptions().position(LatLng(args.taxiData.startLan, args.taxiData.startLng))
+                    .title(routes[0])
+                    .icon(bitmapFromVector(R.drawable.ic_location_red_14)))
+                googleMap.addMarker(MarkerOptions().position(LatLng(args.taxiData.endLan, args.taxiData.endLng))
+                    .title(routes[routes.lastIndex])
+                    .icon(bitmapFromVector(R.drawable.ic_location_blue_14)))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(args.taxiData.startLan, args.taxiData.startLng), 18F))
 
-                    val polyline = googleMap.addPolyline {
-                        width(8f)
-                        color(Color.parseColor("#000000"))
-                        addAll(route!!.points)
+                viewModel.routes.onEach { routing ->
+
+                    val listPoints: List<LatLng> = routing.route!![0].points
+                    val options = PolylineOptions().width(5f).color(Color.BLUE).geodesic(true)
+                    val iterator = listPoints.iterator()
+                    while (iterator.hasNext()) {
+                        val data = iterator.next()
+                        options.add(data)
                     }
-
-                    val k = polyline.points.size
-                    val startLatLng = polyline.points[0]
-                    val middleLatLng = polyline.points[k / 2]
-                    val endLatLng = polyline.points[k - 1]
-
-                    val cameraUpdateMiddle =
-                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng), 12f)
-                    googleMap.moveCamera(cameraUpdateMiddle)
-
-                    val routes = args.taxiData.address
-                    googleMap.addMarker {
-                        title("Start?")
-                        snippet(routes[0])
-                        icon(bitmapFromVector(R.drawable.ic_location_red_14))
-                        position(startLatLng!!)
-                    }
-
-                    googleMap.addMarker {
-                        title("End?")
-                        snippet(routes[routes.lastIndex])
-                        icon(bitmapFromVector(R.drawable.ic_location_blue_14))
-                        position(endLatLng!!)
-                    }
+                    line?.remove()
+                    line = googleMap.addPolyline(options)
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(routing.route[0].latLgnBounds.center))
+                    val builder = LatLngBounds.Builder()
+                    builder.include(LatLng(args.taxiData.startLan, args.taxiData.startLng))
+                    builder.include(LatLng(args.taxiData.endLan, args.taxiData.endLng))
+                    val bounds = builder.build()
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50))
                 }.launchIn(lifecycleScope)
-
-                viewModel.finRoutes(args.taxiData)
             }
         }
     }

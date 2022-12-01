@@ -2,17 +2,16 @@ package uz.nurlibaydev.transportschedule.presentation.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.directions.route.AbstractRouting
-import com.directions.route.Route
-import com.directions.route.RouteException
-import com.directions.route.RoutingListener
+import com.directions.route.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.internal.OnConnectionFailedListener
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
-import uz.nurlibaydev.transportschedule.data.models.Routing
+import uz.nurlibaydev.transportschedule.R
+import uz.nurlibaydev.transportschedule.app.App
+import uz.nurlibaydev.transportschedule.data.models.RouteData
 import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import javax.inject.Inject
 
@@ -26,18 +25,17 @@ class MapViewModelImpl @Inject constructor() : MapViewModel, RoutingListener,
 
     override val progressFlow = MutableSharedFlow<Boolean>()
 
-    override val routes = MutableSharedFlow<Routing>()
-
+    override val routes = MutableSharedFlow<RouteData>()
 
     override fun finRoutes(taxiData: TaxiData) {
-        val routing = com.directions.route.Routing.Builder()
+        val routeData = Routing.Builder()
             .travelMode(AbstractRouting.TravelMode.DRIVING)
             .withListener(this)
             .alternativeRoutes(true)
             .waypoints(LatLng(taxiData.startLan, taxiData.startLng), LatLng(taxiData.endLan, taxiData.endLng))
-            .key("AIzaSyCbtHqVLiqdQJWEm1XHzbjcdrLga8m5yzE")
+            .key(App.instance.getString(R.string.map_key))
             .build()
-        routing.execute()
+        routeData.execute()
     }
 
     override fun onRoutingFailure(p0: RouteException?) {
@@ -56,7 +54,7 @@ class MapViewModelImpl @Inject constructor() : MapViewModel, RoutingListener,
     override fun onRoutingSuccess(p0: ArrayList<Route>?, p1: Int) {
         viewModelScope.launch {
             progressFlow.emit(false)
-            routes.emit(Routing(p0, p1))
+            routes.emit(RouteData(p0, p1))
         }
     }
 

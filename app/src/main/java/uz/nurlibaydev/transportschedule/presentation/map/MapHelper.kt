@@ -5,7 +5,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 
 // Created by Jamshid Isoqov an 10/19/2022
-class MapHelper : OnMapReadyCallback, SupportMapFragment() {
+class MapHelper : SupportMapFragment(), OnMapReadyCallback {
 
     private var map: (googleMap: GoogleMap) -> Unit = {}
 
