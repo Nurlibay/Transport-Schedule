@@ -88,10 +88,27 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     isCompassEnabled = false
                 }
 
+                googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(args.taxiData.startLan,args.taxiData.startLng),16f))
+
+                googleMap.addMarker {
+                    title("Start?")
+                    snippet("Data")
+                    icon(bitmapFromVector(R.drawable.ic_location_red_14))
+                    position(LatLng(args.taxiData.startLan,args.taxiData.startLng))
+                }
+
+                googleMap.addMarker {
+                    title("End?")
+                    snippet("Data")
+                    icon(bitmapFromVector(R.drawable.ic_location_blue_14))
+                    position(LatLng(args.taxiData.endLan,args.taxiData.endLng))
+                }
+
                 viewModel.routes.onEach {
                     val shortestRouteIndex = it.shortestRouteIndex
                     val route = it.route?.get(shortestRouteIndex)
-
                     val polyline = googleMap.addPolyline {
                         width(8f)
                         color(Color.parseColor("#000000"))
@@ -108,19 +125,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     googleMap.moveCamera(cameraUpdateMiddle)
 
                     val routes = args.taxiData.address
-                    googleMap.addMarker {
-                        title("Start?")
-                        snippet(routes[0])
-                        icon(bitmapFromVector(R.drawable.ic_location_red_14))
-                        position(startLatLng!!)
-                    }
 
-                    googleMap.addMarker {
-                        title("End?")
-                        snippet(routes[routes.lastIndex])
-                        icon(bitmapFromVector(R.drawable.ic_location_blue_14))
-                        position(endLatLng!!)
-                    }
                 }.launchIn(lifecycleScope)
 
                 viewModel.finRoutes(args.taxiData)
