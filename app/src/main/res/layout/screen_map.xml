@@ -210,6 +210,12 @@
                         android:text="@string/address"
                         android:textSize="16sp" />
 
+                    <com.baoyachi.stepview.VerticalStepView
+                        android:id="@+id/step_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_standard" />
+
 
                 </LinearLayout>
 
