@@ -143,4 +143,6 @@ dependencies {
 
     //image picker
 //    implementation 'com.github.Drjacky:ImagePicker:2.1.16'
+
+    implementation 'com.github.baoyachi:StepView:1.9'
 }
