@@ -84,8 +84,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     )
                 ).setStepViewComplectedTextColor(Color.parseColor("#0C79FE"))
 
-            val mapFragment =
-                childFragmentManager.findFragmentById(R.id.map) as MapHelper
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
             mapFragment.getMapAsync(mapFragment)
             mapFragment.onMapReady {
                 googleMap = it
@@ -131,10 +130,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     val middleLatLng = polyline.points[k / 2]
 
                     val cameraUpdateMiddle =
-                        CameraUpdateFactory.newLatLngZoom(
-                            middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng),
-                            12f
-                        )
+                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng), 12f)
                     googleMap.moveCamera(cameraUpdateMiddle)
 
                 }.launchIn(lifecycleScope)
