@@ -52,9 +52,8 @@
         android:clipToPadding="true"
         android:orientation="vertical"
         android:padding="@dimen/margin_8"
+        android:splitMotionEvents="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_item_main" />
-
-
 
 </LinearLayout>

@@ -44,7 +44,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-            println(findNavController().backQueue)
+        println(findNavController().backQueue)
         Log.d("TTT", "onViewCreated: $")
         viewBinding.imageBack.setOnClickListener {
             findNavController().navigateUp()
@@ -96,7 +96,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     )
                 ).setStepViewComplectedTextColor(Color.parseColor("#0C79FE"))
 
-           val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
             mapFragment.getMapAsync(mapFragment)
             mapFragment.onMapReady {
                 googleMap = it
