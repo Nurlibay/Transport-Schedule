@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +37,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
     private lateinit var dialog: ProgressDialog
     @Inject
     lateinit var pref: SharePref
+    private val navController: NavController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
 
     @OptIn(FlowPreview::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +65,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         adapter.setItemClickListener {
-           findNavController().navigate(MainScreenDirections.actionMainScreenToMapScreen(it))
+           navController.navigate(MainScreenDirections.actionMainScreenToMapScreen(it))
         }
 
         viewModel.errorFlow.onEach {

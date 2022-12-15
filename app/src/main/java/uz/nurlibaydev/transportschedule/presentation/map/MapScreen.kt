@@ -3,10 +3,12 @@ package uz.nurlibaydev.transportschedule.presentation.map
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,6 +25,7 @@ import uz.nurlibaydev.transportschedule.presentation.dialogs.ProgressDialog
 import uz.nurlibaydev.transportschedule.utils.extenions.bitmapFromVector
 import uz.nurlibaydev.transportschedule.utils.extenions.showError
 import uz.nurlibaydev.transportschedule.utils.extenions.showMessage
+
 
 // Created by Jamshid Isoqov an 11/18/2022
 
@@ -59,6 +62,13 @@ class MapScreen : Fragment(R.layout.screen_map) {
             }
         }.launchIn(lifecycleScope)
 
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
         viewBinding.apply {
 
             val data = args.taxiData
@@ -84,8 +94,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     )
                 ).setStepViewComplectedTextColor(Color.parseColor("#0C79FE"))
 
-            val mapFragment =
-                childFragmentManager.findFragmentById(R.id.map) as MapHelper
+            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
             mapFragment.getMapAsync(mapFragment)
             mapFragment.onMapReady {
                 googleMap = it
@@ -95,24 +104,17 @@ class MapScreen : Fragment(R.layout.screen_map) {
 
                 googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-                googleMap.animateCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        LatLng(
-                            args.taxiData.startLan,
-                            args.taxiData.startLng
-                        ), 16f
-                    )
-                )
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(args.taxiData.startLan, args.taxiData.startLng), 16f))
 
                 googleMap.addMarker {
-                    title("Start?")
+                    title(args.taxiData.address[0])
                     snippet("Data")
                     icon(bitmapFromVector(R.drawable.ic_location_red_14))
                     position(LatLng(args.taxiData.startLan, args.taxiData.startLng))
                 }
 
                 googleMap.addMarker {
-                    title("End?")
+                    title(args.taxiData.address[args.taxiData.address.size - 1])
                     snippet("Data")
                     icon(bitmapFromVector(R.drawable.ic_location_blue_14))
                     position(LatLng(args.taxiData.endLan, args.taxiData.endLng))
@@ -131,10 +133,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     val middleLatLng = polyline.points[k / 2]
 
                     val cameraUpdateMiddle =
-                        CameraUpdateFactory.newLatLngZoom(
-                            middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng),
-                            12f
-                        )
+                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng), 12f)
                     googleMap.moveCamera(cameraUpdateMiddle)
 
                 }.launchIn(lifecycleScope)
