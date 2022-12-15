@@ -25,7 +25,7 @@ class SplashScreen : Fragment(R.layout.screen_splash) {
         lifecycleScope.launchWhenResumed {
             delay(1500)
             if (pref.isSigned) {
-                navController.navigate(SplashScreenDirections.actionSplashScreenToMainScreen())
+                navController.navigate(R.id.action_splashScreen_to_mainScreen)
             } else {
                 navController.navigate(SplashScreenDirections.actionSplashScreenToSignInScreen())
             }

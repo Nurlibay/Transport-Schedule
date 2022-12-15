@@ -2,12 +2,13 @@ package uz.nurlibaydev.transportschedule.presentation.map
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.nurlibaydev.transportschedule.R
+import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import uz.nurlibaydev.transportschedule.databinding.ScreenMapBinding
 import uz.nurlibaydev.transportschedule.presentation.dialogs.ProgressDialog
 import uz.nurlibaydev.transportschedule.utils.extenions.bitmapFromVector
@@ -33,7 +35,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
 
     private val viewBinding: ScreenMapBinding by viewBinding()
 
-    private val args: MapScreenArgs by navArgs()
+    private lateinit var args: TaxiData
 
     private lateinit var dialog: ProgressDialog
 
@@ -41,11 +43,21 @@ class MapScreen : Fragment(R.layout.screen_map) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+
+            println(findNavController().backQueue)
+        Log.d("TTT", "onViewCreated: $")
+        viewBinding.imageBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        args = requireArguments().getSerializable("data") as TaxiData
+
         dialog = ProgressDialog(ctx = requireContext(), "Progress")
 
         viewModel.errorFlow.onEach {
             showError(it)
         }.launchIn(lifecycleScope)
+
 
         viewModel.messageFlow.onEach {
             showMessage(it)
@@ -61,7 +73,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
 
         viewBinding.apply {
 
-            val data = args.taxiData
+            val data = args
             tvTaxiName.text = data.taxiName
             tvPhone.text = data.phone
             tvDuration.text = data.schedule
@@ -84,7 +96,7 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     )
                 ).setStepViewComplectedTextColor(Color.parseColor("#0C79FE"))
 
-            val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
+           val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapHelper
             mapFragment.getMapAsync(mapFragment)
             mapFragment.onMapReady {
                 googleMap = it
@@ -97,8 +109,8 @@ class MapScreen : Fragment(R.layout.screen_map) {
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(
-                            args.taxiData.startLan,
-                            args.taxiData.startLng
+                            args.startLan,
+                            args.startLng
                         ), 16f
                     )
                 )
@@ -107,14 +119,14 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     title("Start?")
                     snippet("Data")
                     icon(bitmapFromVector(R.drawable.ic_location_red_14))
-                    position(LatLng(args.taxiData.startLan, args.taxiData.startLng))
+                    position(LatLng(args.startLan, args.startLng))
                 }
 
                 googleMap.addMarker {
                     title("End?")
                     snippet("Data")
                     icon(bitmapFromVector(R.drawable.ic_location_blue_14))
-                    position(LatLng(args.taxiData.endLan, args.taxiData.endLng))
+                    position(LatLng(args.endLan, args.endLng))
                 }
 
                 viewModel.routes.onEach {
@@ -130,12 +142,17 @@ class MapScreen : Fragment(R.layout.screen_map) {
                     val middleLatLng = polyline.points[k / 2]
 
                     val cameraUpdateMiddle =
-                        CameraUpdateFactory.newLatLngZoom(middleLatLng ?: LatLng(args.taxiData.startLan, args.taxiData.startLng), 12f)
+                        CameraUpdateFactory.newLatLngZoom(
+                            middleLatLng ?: LatLng(
+                                args.startLan,
+                                args.startLng
+                            ), 12f
+                        )
                     googleMap.moveCamera(cameraUpdateMiddle)
 
                 }.launchIn(lifecycleScope)
 
-                viewModel.finRoutes(args.taxiData)
+                viewModel.finRoutes(args)
             }
         }
     }

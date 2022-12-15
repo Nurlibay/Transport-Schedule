@@ -28,15 +28,12 @@ class MainViewModelImpl @Inject constructor(
 
     override fun getAllTaxis() {
         viewModelScope.launch {
-            allTaxis.emit(
-                taxis
-            )
             progressFlow.emit(true)
-            taxiHelper
-                .getAllTaxi()
+            taxiHelper.getAllTaxi()
                 .collectLatest {
                     progressFlow.emit(false)
                     it.onSuccess { data ->
+                        taxis = data
                         allTaxis.emit(data)
                     }.onMessage { message ->
                         messageFlow.emit(message)
@@ -49,14 +46,10 @@ class MainViewModelImpl @Inject constructor(
 
     override fun searchTaxis(query: String) {
         viewModelScope.launch {
-            if (query == "") {
-                allTaxis.emit(taxis)
-            } else {
-                val list = taxis.filter {
-                    it.taxiName.startsWith(query)
-                }
-                allTaxis.emit(list)
+            val list = taxis.filter {
+                it.taxiName.contains(query) || it.phone.startsWith(query)
             }
+            allTaxis.emit(list)
         }
     }
 }

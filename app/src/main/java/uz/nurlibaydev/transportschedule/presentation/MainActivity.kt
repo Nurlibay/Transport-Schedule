@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
         setLocale()
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        navController.popBackStack()
-    }
-
     private fun setLocale() {
         val localeName = pref.language
         val locale = Locale(localeName)
@@ -53,4 +47,5 @@ class MainActivity : AppCompatActivity() {
         this.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(refresh)
     }
+
 }

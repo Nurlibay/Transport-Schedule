@@ -1,7 +1,6 @@
 package uz.nurlibaydev.transportschedule.presentation.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,18 +33,17 @@ class MainScreen : Fragment(R.layout.screen_main) {
         MainAdapter()
     }
     private lateinit var dialog: ProgressDialog
+
     @Inject
     lateinit var pref: SharePref
 
     @OptIn(FlowPreview::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         pref.isSigned = true
+
         viewBinding.listTaxi.adapter = adapter
 
         dialog = ProgressDialog(ctx = requireContext(), "Progress")
-
-        viewModel.getAllTaxis()
-
         viewBinding.btnLang.onClick {
             val dialog = LanguageDialog()
             dialog.show(requireActivity().supportFragmentManager, "LanguageDialog")
@@ -53,7 +51,7 @@ class MainScreen : Fragment(R.layout.screen_main) {
 
         viewBinding.inputSearch
             .textChanges()
-            .debounce(200L)
+            .debounce(100L)
             .onEach {
                 viewModel.searchTaxis(it.toString())
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -63,7 +61,10 @@ class MainScreen : Fragment(R.layout.screen_main) {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         adapter.setItemClickListener {
-           findNavController().navigate(MainScreenDirections.actionMainScreenToMapScreen(it))
+
+            findNavController().navigate(R.id.mapScreen, Bundle().apply {
+                putSerializable("data", it)
+            })
         }
 
         viewModel.errorFlow.onEach {
@@ -78,8 +79,10 @@ class MainScreen : Fragment(R.layout.screen_main) {
             if (it) {
                 dialog.show()
             } else {
-                dialog.cancel()
+                dialog.dismiss()
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.getAllTaxis()
     }
 }

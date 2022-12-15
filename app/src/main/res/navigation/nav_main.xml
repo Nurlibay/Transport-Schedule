@@ -10,9 +10,6 @@
         android:name="uz.nurlibaydev.transportschedule.presentation.map.MapScreen"
         android:label="MapScreen"
         tools:layout="@layout/screen_map">
-        <argument
-            android:name="taxi_data"
-            app:argType="uz.nurlibaydev.transportschedule.data.models.TaxiData" />
     </fragment>
 
     <fragment
@@ -39,8 +36,7 @@
             android:id="@+id/action_signInScreen_to_mainScreen"
             app:destination="@id/mainScreen"
             app:launchSingleTop="true"
-            app:popUpTo="@id/nav_main"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/nav_main" />
     </fragment>
 
     <fragment
@@ -56,8 +52,7 @@
             app:destination="@id/mainScreen"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_main"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -70,12 +65,12 @@
             app:destination="@id/signInScreen"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_main"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_splashScreen_to_mainScreen"
             app:destination="@id/mainScreen"
             app:launchSingleTop="true"
-            app:popUpTo="@id/nav_main"
+            app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
     </fragment>
 
