@@ -8,6 +8,7 @@ import uz.nurlibaydev.transportschedule.R
 import uz.nurlibaydev.transportschedule.data.models.TaxiData
 import uz.nurlibaydev.transportschedule.databinding.ListItemMainBinding
 import uz.nurlibaydev.transportschedule.utils.extenions.inflate
+import uz.nurlibaydev.transportschedule.utils.extenions.onClick
 
 // Created by Jamshid Isoqov an 11/20/2022
 
@@ -34,25 +35,19 @@ class MainAdapter : ListAdapter<TaxiData, MainAdapter.ViewHolder>(listItemTaxiCa
         itemClickListener = block
     }
 
-
     inner class ViewHolder(private val binding: ListItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            binding.root.setOnClickListener {
-                itemClickListener?.invoke(getItem(absoluteAdapterPosition))
-            }
-        }
-
         fun onBind() {
             val data = getItem(absoluteAdapterPosition)
             binding.apply {
                 tvTaxiName.text = data.taxiName
                 tvTaxiStartLocation.text = data.address[0]
                 tvTaxiEndLocation.text = data.address[data.address.lastIndex]
+                root.onClick {
+                    itemClickListener?.invoke(getItem(absoluteAdapterPosition))
+                }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

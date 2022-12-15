@@ -19,12 +19,10 @@
         android:id="@+id/mainScreen"
         android:name="uz.nurlibaydev.transportschedule.presentation.main.MainScreen"
         android:label="MainScreen"
-        tools:layout="@layout/screen_main">
-
+        tools:layout="@layout/screen_main" >
         <action
             android:id="@+id/action_mainScreen_to_mapScreen"
             app:destination="@id/mapScreen" />
-
     </fragment>
 
     <fragment
